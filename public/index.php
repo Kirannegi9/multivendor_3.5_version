@@ -3,17 +3,14 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
-<<<<<<< HEAD
-=======
 // Increase execution time limit for admin panel
 set_time_limit(300);
 
->>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
 define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
-| Check If The Application Is Under Maintenance
+| Check If The Application Is Under Maintenance     
 |--------------------------------------------------------------------------
 |
 | If the application is in maintenance / demo mode via the "down" command

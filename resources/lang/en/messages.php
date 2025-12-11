@@ -8863,8 +8863,7 @@ Smartly or Earn. ',
   'jpg, jpeg, png, gif, webp. Less Than 2MB' => 'Jpg, jpeg, png, gif, webp. Less Than 2MB',
   'order_is_processing' => 'Order is processing',
   'This text appears as the label or heading above the location search bar. Write it under 50 characters.' => 'This text appears as the label or heading above the location search bar. Write it under 50 characters.',
-<<<<<<< HEAD
-=======
   'Toggle RTL' => 'Toggle RTL',
->>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
+  '500_warning_message' => '500 warning message',
+  'reload_page' => 'Reload page',
 );

@@ -7,10 +7,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use App\Models\Module;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Cache;
->>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
 
 class CurrentModule
 {
@@ -37,7 +34,7 @@ class CurrentModule
 =======
         $module = isset($module_id)?Cache::remember('module_'.$module_id, 3600, function() use ($module_id) {
             return Module::with('translations')->find($module_id);
-        }):Cache::remember('active_module', 3600, function() {
+        }):Cache::remember('active_module', 3600, function() {  
             return Module::with('translations')->active()->get()->first();
         });
 >>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
