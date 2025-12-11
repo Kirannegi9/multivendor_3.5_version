@@ -3,6 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
+// Increase execution time limit for admin panel
+set_time_limit(300);
+
 define('LARAVEL_START', microtime(true));
 
 /*

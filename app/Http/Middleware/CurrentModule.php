@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use App\Models\Module;
+use Illuminate\Support\Facades\Cache;
 
 class CurrentModule
 {
@@ -28,7 +29,11 @@ class CurrentModule
 
         $module_id = Config::get('module.current_module_id');
         $module_id = is_array($module_id)?null:$module_id;
-        $module = isset($module_id)?Module::with('translations')->find($module_id):Module::with('translations')->active()->get()->first();
+        $module = isset($module_id)?Cache::remember('module_'.$module_id, 3600, function() use ($module_id) {
+            return Module::with('translations')->find($module_id);
+        }):Cache::remember('active_module', 3600, function() {
+            return Module::with('translations')->active()->get()->first();
+        });
 
         if ($module) {
             Config::set('module.current_module_id', $module->id);

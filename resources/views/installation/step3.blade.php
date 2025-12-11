@@ -24,7 +24,7 @@
                         <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                               data-bs-title="Follow our documentation">
 
-                            <img src="{{asset('public/assets/installation')}}/assets/img/svg-icons/info.svg" alt=""
+                            <img src="{{asset('assets/installation')}}/assets/img/svg-icons/info.svg" alt=""
                                  class="svg">
                         </span>
             </a>
@@ -43,7 +43,7 @@
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-md-12">
                         <div class="alert alert-danger">
-                            Invalid Database Credentials or Host. Please check your database credentials carefully.
+                            {{ session('error') ?? 'Invalid Database Credentials or Host. Please check your database credentials carefully.' }}
                         </div>
                     </div>
                 </div>
@@ -99,10 +99,10 @@
                                                placeholder="Ex: password">
                                         <div class="togglePassword">
                                             <img
-                                                src="{{asset('public/assets/installation')}}/assets/img/svg-icons/eye.svg"
+                                                src="{{asset('assets/installation')}}/assets/img/svg-icons/eye.svg"
                                                 alt="" class="svg eye">
                                             <img
-                                                src="{{asset('public/assets/installation')}}/assets/img/svg-icons/eye-off.svg"
+                                                src="{{asset('assets/installation')}}/assets/img/svg-icons/eye-off.svg"
                                                 alt=""
                                                 class="svg eye-off">
                                         </div>

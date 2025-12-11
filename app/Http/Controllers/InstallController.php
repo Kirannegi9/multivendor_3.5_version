@@ -205,11 +205,11 @@ class InstallController extends Controller
             if (file_exists($path)) {
                 return redirect()->route('step4', ['token' => $request['token']]);
             } else {
-                session()->flash('error', 'Database error!');
+                session()->flash('error', 'Failed to create .env file. Please check file permissions.');
                 return redirect()->route('step3', ['token' => bcrypt('step_3')]);
             }
         } else {
-            session()->flash('error', 'Database host error!');
+            // Error message is already set by check_database_connection method
             return redirect()->route('step3', ['token' => bcrypt('step_3')]);
         }
     }
@@ -246,12 +246,42 @@ class InstallController extends Controller
     function check_database_connection($db_host = "", $db_name = "", $db_user = "", $db_pass = ""): bool
     {
         try {
-            if (@mysqli_connect($db_host, $db_user, $db_pass, $db_name)) {
-                return true;
-            } else {
+            // Check if mysqli extension is available
+            if (!function_exists('mysqli_connect')) {
+                session()->flash('error', 'MySQLi extension is not enabled. Please enable mysqli extension in your PHP configuration.');
                 return false;
             }
-        }catch(\Exception $exception){
+
+            // Try to connect to MySQL server first (without database)
+            $connection = @mysqli_connect($db_host, $db_user, $db_pass);
+            
+            if (!$connection) {
+                $error = mysqli_connect_error();
+                session()->flash('error', 'Database connection failed: ' . ($error ?: 'Unknown error. Please check your host, username, and password.'));
+                return false;
+            }
+
+            // Check if database exists
+            $db_selected = @mysqli_select_db($connection, $db_name);
+            
+            if (!$db_selected) {
+                // Database doesn't exist, try to create it
+                $create_db_query = "CREATE DATABASE IF NOT EXISTS `" . mysqli_real_escape_string($connection, $db_name) . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+                if (@mysqli_query($connection, $create_db_query)) {
+                    mysqli_close($connection);
+                    return true;
+                } else {
+                    $error = mysqli_error($connection);
+                    mysqli_close($connection);
+                    session()->flash('error', 'Database "' . $db_name . '" does not exist and could not be created. Error: ' . ($error ?: 'Unknown error. Please create the database manually.'));
+                    return false;
+                }
+            }
+
+            mysqli_close($connection);
+            return true;
+        } catch(\Exception $exception) {
+            session()->flash('error', 'Database connection error: ' . $exception->getMessage());
             return false;
         }
     }
