@@ -24,11 +24,7 @@
                         <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                               data-bs-title="Follow our documentation">
 
-<<<<<<< HEAD
-                            <img src="{{asset('public/assets/installation')}}/assets/img/svg-icons/info.svg" alt=""
-=======
                             <img src="{{asset('assets/installation')}}/assets/img/svg-icons/info.svg" alt=""
->>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
                                  class="svg">
                         </span>
             </a>
@@ -107,19 +103,11 @@
                                                placeholder="Ex: password">
                                         <div class="togglePassword">
                                             <img
-<<<<<<< HEAD
-                                                src="{{asset('public/assets/installation')}}/assets/img/svg-icons/eye.svg"
-                                                alt="" class="svg eye">
-                                            <img
-                                                src="{{asset('public/assets/installation')}}/assets/img/svg-icons/eye-off.svg"
-=======
                                                 src="{{asset('assets/installation')}}/assets/img/svg-icons/eye.svg"
                                                 alt="" class="svg eye">
                                             <img
                                                 src="{{asset('assets/installation')}}/assets/img/svg-icons/eye-off.svg"
->>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
-                                                alt=""
-                                                class="svg eye-off">
+                                                alt="" class="svg eye-off">
                                         </div>
                                     </div>
                                 </div>

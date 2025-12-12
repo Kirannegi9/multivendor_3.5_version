@@ -29,15 +29,14 @@ class CurrentModule
 
         $module_id = Config::get('module.current_module_id');
         $module_id = is_array($module_id)?null:$module_id;
-<<<<<<< HEAD
         $module = isset($module_id)?Module::with('translations')->find($module_id):Module::with('translations')->active()->get()->first();
-=======
+
         $module = isset($module_id)?Cache::remember('module_'.$module_id, 3600, function() use ($module_id) {
             return Module::with('translations')->find($module_id);
         }):Cache::remember('active_module', 3600, function() {  
             return Module::with('translations')->active()->get()->first();
         });
->>>>>>> 38505692d8ab8d2292cfd02f8671bccfa1600ee6
+
 
         if ($module) {
             Config::set('module.current_module_id', $module->id);
